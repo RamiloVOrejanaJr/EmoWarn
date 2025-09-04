@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>EmoWarn</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/style.css" >
+    </head>
+    <body>
+        <label class="welcomeMSG">
+            <span class="welcomeTitle">Welcome to <span class="emowarnColor">EmoWarn</span>!</span><br>
+            <span class="welcomeDescription">
+                EmoWarn is a project for detecting fake news with emotional warnings.<br>Please note that all outputs are for <strong>testing purposes only</strong> as we refine our detection algorithm.<br>
+                Thank you for exploring EmoWarn!
+            </span>
+        </label>
+        <header class="navBar">
+                <img class="logo" src="static/images/rsz_emowarnlogo.png" alt="logo">
+                <nav>
+                    <ul class="navLinks">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Guide</a></li>
+                    </ul>
+                </nav>
+                <a class="cta" href="#"><button>Contact</button></a>
+        </header>
+        <div class="container">
+            <section>
+                <form action="{{ url_for('predict')}}" class="form" method="post">
+                    <div class="input-box">
+                        <label>News Headline</label>
+                        <input type="text" name = "headline" placeholder="Enter news headline...">
+                    </div>
+                    <div class="input-box">
+                        <label>News Article</label>
+                        <textarea class="textarea" name = "article" placeholder="Enter news article..." rows="8"></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+        </div>  
+        <div class="formSectionContainer">
+            <section class="formSection">
+                <header>Fake News Detection</header>
+
+                <form class="formWithDynamicLabel">
+                    <header style="text-align: left;">News Headline and Article</header>
+
+                    <div class="resultLabelContainer">
+                        <label>Result:</label>
+                        <label class="dynamicLabel">{{ prediction_text }}</label>
+                    </div>
+
+                    <header class="graphHeader">Graphical Results</header>
+                </form>
+
+            </section>
+            <section class="formSection">
+                <header>Emotion Classification</header>
+                <form class="formWithDynamicLabel">
+                    <header style="text-align: left;">News Headline and Article</header>
+                    <div class="resultLabelContainer">
+                        <label>Result:</label>
+                        <label class="dynamicLabel">This should classify the possible emotions of the reader</label>
+                    </div>
+                    <header class="graphHeader">Graphical Results</header>
+                </form>
+            </section>
+        </div>
+        <section class="recommendationSection">
+            <h2>The Most Reliable Sources</h2>
+            <ul class="recommendedLinks">
+                <li>
+                    <a href="https://www.inquirer.net/">
+                        <img src="static/images/inquirer-thumbnail.jpg" alt="Philippine Daily Inquirer" class="linkThumbnail">
+                        <span class="linkLabel">Philippine Daily Inquirer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.pna.gov.ph/">
+                        <img src="static/images/pna-thumbnail.jpg" alt="Philippine News Agency" class="linkThumbnail">
+                        <span class="linkLabel">Philippine News Agency</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.sunstar.com.ph/">
+                        <img src="static/images/sunstar-thumbnail.png" alt="SunStar Publishing" class="linkThumbnail">
+                        <span class="linkLabel">SunStar Publishing, Inc.</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://mb.com.ph/">
+                        <img src="static/images/mb-thumbnail.jpg" alt="Manila Bulletin" class="linkThumbnail">
+                        <span class="linkLabel">Manila Bulletin</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </body>
+</html>

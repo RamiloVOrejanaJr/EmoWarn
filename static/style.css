@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the content to the top */
+    align-items: center;
+    background-image: url("images/emowarn_bg2.png");
+    background-size: contain;
+    padding-bottom: 50px;
+}   
+
+.welcomeMSG {
+    margin-top: 200px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    max-width: 80%; /* Prevents the text from touching the sides */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.welcomeTitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem; /* Makes "Welcome to" larger */
+    font-weight: 600;
+    color: #333;
+}
+
+.emowarnColor {
+    color: #C89A6A; /* Color for the word "EmoWarn" */
+    font-weight: 700; /* Make "EmoWarn" stand out more */
+}
+
+.welcomeDescription {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+li, a, button{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+.navBar {
+    position: fixed;  /* Fix the header at the top */
+    top: 0;  /* Align the header to the top */
+    left: 0;
+    width: 100%; /* Make sure the header takes the full width */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 10%;
+    background-color: rgba(200, 154, 106, 0.8); /* Add a background color to make it stand out */
+    z-index: 10; /* Make sure it stays on top of other elements */
+}
+
+.logo{
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.navLinks{
+    list-style: none;
+}
+
+.navLinks li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.navLinks li a {
+    transition: all 0.3s ease 0s;
+}
+
+.navLinks li a:hover {
+    color: #F1E1C6;
+}
+
+button {
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: rgba(200, 154, 106, 0.5);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover{
+    background: #F1E1C6;
+}
+
+.container{
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    background: rgba(200, 154, 106, 0.8);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+
+.container .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all children horizontally */
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-box label{
+    color: #333;
+}
+
+.form .input-box input {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.form .input-box textarea{
+    position: relative;
+    height: 200px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+    resize: none;
+    cursor: pointer;
+}
+
+.form button{
+    height: 44px;
+    width: 40%;
+    font-size: 1rem;
+    font-weight: 400;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #F1E1C6;
+}
+.form button:hover{
+    background: linear-gradient(to right, #7F5A3B, #F1E1C6);
+}
+
+.formSectionContainer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0 5%; /* Add padding on the sides */
+}
+
+.formSection {
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    background-color: rgba(200, 154, 106, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 600px; /* Increased height for each form */
+}
+
+.formSection header {
+    font-size: 1.5rem;
+    font-weight: 550;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.formSection form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formSection form label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.formWithDynamicLabel {
+    display: flex;
+    flex-direction: column;  /* Stack elements vertically */
+    gap: 10px;
+}
+
+.resultLabelContainer {
+    display: flex;            /* Align the labels horizontally */
+    align-items: center;      /* Vertically center the labels */
+    gap: 5px;      
+    margin-bottom: 5px;           /* Add a small gap between the labels */
+}
+
+.dynamicLabel {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #555;
+}
+
+.graphHeader {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    margin-top: 20px; /* Add spacing above */
+}
+
+.pieChartContainer {    
+    width: 100%;
+    max-width: 250px;  /* Limit the width of the chart container */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.emotionChartContainer {
+    text-align: center;  
+    margin-top: 20px;   /* Adjust this value to control space between charts */
+    padding: 15px;
+    width: 100%;
+    max-width: 300px;    /* Limit the width of the chart container */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+canvas {
+    width: 100% !important;  /* Make the canvas width 100% of its container */
+    height: auto !important; /* Let the height adjust based on the width */
+}
+
+/* Style for the recommendation section */
+.recommendationSection {
+    width: 100%;                      /* Make sure the section takes the full width */
+    text-align: center;                /* Center align the text */
+    color: #333;                       /* Text color */
+    font-family: "Poppins", sans-serif; /* Font style */
+    margin-top: 70px;                  /* Space from the previous content */
+}
+
+.recommendationSection h2 {
+    font-size: 1.8rem;                 /* Adjust heading size */
+    font-weight: 600;                  /* Make the heading stand out */
+    margin-bottom: 15px;               /* Space below the heading */
+}
+
+.recommendedLinks {
+    display: flex;                     /* Use flexbox for horizontal layout */
+    justify-content: center;           /* Center the list items horizontally */
+    gap: 20px;                         /* Space between each thumbnail */
+    list-style-type: none;             /* Remove bullet points */
+    padding: 0;                        /* Remove padding */
+}
+
+.recommendedLinks li {
+    display: flex;                     /* Use flexbox for aligning thumbnail and label */
+    flex-direction: column;            /* Stack thumbnail and label vertically */
+    align-items: center;               /* Center align both items */
+}
+
+.recommendedLinks li a {
+    display: flex;                     /* Align image and text in a flex container */
+    flex-direction: column;            /* Stack the thumbnail and label */
+    align-items: center;               /* Center the items */
+    text-decoration: none;             /* Remove underline from links */
+}
+
+/* Hover effect for the image */
+.linkThumbnail {
+    width: 270px;                       /* Increased thumbnail width */
+    height: 270px;                      /* Increased thumbnail height */
+    border-radius: 5px;                 /* Optional: rounded corners for the thumbnail */
+    object-fit: cover;                  /* Ensure the image fits well within the specified width/height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scale and shadow */
+}
+
+/* Hover effect for the image */
+.recommendedLinks li a:hover .linkThumbnail {
+    transform: scale(1.1); /* Slightly enlarge the image */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.linkLabel {
+    margin-top: 15px;                   /* Space between the thumbnail and the label */
+    font-size: 1rem;                   /* Adjust label font size */
+    color: #333;                       /* Label color */
+    font-weight: 500;                  /* Make the label bold */
+    transition: color 0.3s ease;       /* Smooth transition for color change */                    /* Optional: padding for better text interaction */
+}
