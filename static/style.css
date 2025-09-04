@@ -309,6 +309,27 @@ canvas {
     margin-bottom: 15px;               /* Space below the heading */
 }
 
+.filter-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-buttons button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: rgba(200, 154, 106, 0.8);
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+    background-color: rgba(175, 134, 91, 0.9); /* Darker shade */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional hover effect */
+}
+
 .recommendedLinks {
     display: flex;                     /* Use flexbox for horizontal layout */
     justify-content: center;           /* Center the list items horizontally */
@@ -352,4 +373,20 @@ canvas {
     font-weight: 500;                  /* Make the label bold */
     transition: color 0.3s ease;       /* Smooth transition for color change */               
     margin-bottom: 200px;   
+}
+
+@media (max-width: 932px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center content vertically */
+        align-items: center;    /* Center content horizontally */
+        height: 100vh;          /* Full height for centering */
+        padding: 10px;          /* Prevent edge overflow */
+    }
+
+    .container, .formSection {
+        margin: 0 auto;        /* Center containers horizontally */
+        text-align: center;    /* Center-align text content */
+    }
 }

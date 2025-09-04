@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>EmoWarn</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="static/style.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="static/footer.css">
@@ -85,32 +85,129 @@
         <div class="recommendationSection">
         <section>
             <h2>The Most Reliable Sources</h2>
-            <ul class="recommendedLinks">
-                <li>
-                    <a href="https://www.inquirer.net/">
-                        <img src="static/images/inquirer-thumbnail.jpg" alt="Philippine Daily Inquirer" class="linkThumbnail">
-                        <span class="linkLabel">Philippine Daily Inquirer</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.pna.gov.ph/">
-                        <img src="static/images/pna-thumbnail.jpg" alt="Philippine News Agency" class="linkThumbnail">
-                        <span class="linkLabel">Philippine News Agency</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.sunstar.com.ph/">
-                        <img src="static/images/sunstar-thumbnail.png" alt="SunStar Publishing" class="linkThumbnail">
-                        <span class="linkLabel">SunStar Publishing, Inc.</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://mb.com.ph/">
-                        <img src="static/images/mb-thumbnail.jpg" alt="Manila Bulletin" class="linkThumbnail">
-                        <span class="linkLabel">Manila Bulletin</span>
-                    </a>
-                </li>
-            </ul>
+            <!-- Buttons for filtering -->
+            <div class="filter-buttons">
+                <button onclick="filterImages('general')">General</button>
+                <button onclick="filterImages('sports')">Sports</button>
+                <button onclick="filterImages('health')">Health</button>
+                <button onclick="filterImages('politics')">Politics</button>
+            </div>
+
+            <div id="general" class="image-group">
+                <ul id="recommendedLinks" class="recommendedLinks">
+                    <li>
+                        <a href="https://www.inquirer.net/" target="_blank">
+                            <img src="static/images/inquirer-thumbnail.jpg" alt="Philippine Daily Inquirer" class="linkThumbnail">
+                            <span class="linkLabel">Philippine Daily Inquirer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.pna.gov.ph/" target="_blank">
+                            <img src="static/images/pna-thumbnail.jpg" alt="Philippine News Agency" class="linkThumbnail">
+                            <span class="linkLabel">Philippine News Agency</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.sunstar.com.ph/" target="_blank">
+                            <img src="static/images/sunstar-thumbnail.png" alt="SunStar Publishing" class="linkThumbnail">
+                            <span class="linkLabel">SunStar Publishing, Inc.</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://mb.com.ph/" target="_blank">
+                            <img src="static/images/mb-thumbnail.jpg" alt="Manila Bulletin" class="linkThumbnail">
+                            <span class="linkLabel">Manila Bulletin</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sports" class="image-group" style="display: none;">
+                <ul id="recommendedLinks" class="recommendedLinks">
+                    <li>
+                        <a href="https://sports.inquirer.net/" target="_blank">
+                            <img src="static/images/inquirer-thumbnail.jpg" alt="Philippine Daily Inquirer" class="linkThumbnail">
+                            <span class="linkLabel">Philippine Daily Inquirer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://tiebreakertimes.com.ph/" target="_blank">
+                            <img src="static/images/tiebreaker_times.png" alt="Tiebreaker Times" class="linkThumbnail">
+                            <span class="linkLabel">Tiebreaker Times</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.spin.ph/" target="_blank">
+                            <img src="static/images/spinph.jpg" alt="Spin.ph" class="linkThumbnail">
+                            <span class="linkLabel">SPIN.ph</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.pba.ph/" target="_blank">
+                            <img src="static/images/pba.jpg" alt="Pba.ph" class="linkThumbnail">
+                            <span class="linkLabel">PBA.ph</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="health" class="image-group" style="display: none;">
+                <ul id="recommendedLinks" class="recommendedLinks">
+                    <li>
+                        <a href="https://news.tv5.com.ph/articles/health">
+                            <img src="static/images/tv5.png" alt="TV5" class="linkThumbnail">
+                            <span class="linkLabel">TV5</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.pna.gov.ph/categories/health-and-lifestyle">
+                            <img src="static/images/pna-thumbnail.jpg" alt="Philippine News Agency" class="linkThumbnail">
+                            <span class="linkLabel">Philippine News Agency</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.who.int/philippines">
+                            <img src="static/images/whoph.jpg" alt="whoph" class="linkThumbnail">
+                            <span class="linkLabel">World Health Organization PH</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.pchrd.dost.gov.ph/">
+                            <img src="static/images/pchrd.jpg" alt="Philippine Council for Health Research and Development" class="linkThumbnail">
+                            <span class="linkLabel">Philippine Council for Health <br>Research and Development</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="politics" class="image-group" style="display: none;">
+                <ul id="recommendedLinks" class="recommendedLinks">
+                    <li>
+                        <a href="https://www.inquirer.net/">
+                            <img src="static/images/inquirer-thumbnail.jpg" alt="Philippine Daily Inquirer" class="linkThumbnail">
+                            <span class="linkLabel">Philippine Daily Inquirer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.philstar.com/">
+                            <img src="static/images/philstar.png" alt="Philstar" class="linkThumbnail">
+                            <span class="linkLabel">Philstar.com</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://politiko.com.ph/">
+                            <img src="static/images/politiko.jpg" alt="POLITIKO" class="linkThumbnail">
+                            <span class="linkLabel">POLITIKO</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.rappler.com/">
+                            <img src="static/images/rappler.jpg" alt="RAPPLER" class="linkThumbnail">
+                            <span class="linkLabel">RAPPLER</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </section>
     </div>
     <footer id="footer" class="footer-distributed">
@@ -151,6 +248,7 @@
     </footer>
 
     </body>
+
     <script>
         //Contact Button
         function toggleContactDropdown() {
@@ -217,5 +315,21 @@
                 },
             }
         });
+    </script>
+    <script>
+        //Filter Images
+        function filterImages(category) {
+        // Hide all groups
+        const groups = document.querySelectorAll('.image-group');
+        groups.forEach(group => {
+            group.style.display = 'none';
+        });
+
+        // Show the selected category group
+        const selectedGroup = document.getElementById(category);
+        if (selectedGroup) {
+            selectedGroup.style.display = 'block';
+        }
+}
     </script>
 </html>
