@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template
 from nltk.corpus import stopwords
-#import tf_keras
-import tensorflow as tf
+import tf_keras
 import re
 
 
@@ -15,10 +14,10 @@ def complete_preprocessing(article):
     return article
 
 
-#get emotion classification model
-emo_model = tf.keras.models.load_model('models/emo_model.keras')
+#get emotion clasification model
+emo_model = tf_keras.models.load_model('saved_model/my_model')
 
-fake_news_model = tf.keras.models.load_model('models/fake_news_model.keras')
+fake_news_model = tf_keras.models.load_model('fake_news_model/my_model')
 
 # Create flask app
 flask_app = Flask(__name__)
@@ -28,23 +27,22 @@ flask_app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@flask_app.route('/instructions') 
+def instructions(): 
+    return render_template('instructions.html')
 
 @flask_app.route("/predict", methods=["POST", "GET"])
 def predict():
     #grab user input from form
-    headline_input = "test" #request.form.get('headline')
-    content_input = "test"#request.form.get('article')
+    headline_input = request.form.get('headline')
+    content_input = request.form.get('article')
 
     #getting and preprocessing user inputted article
     article = headline_input + content_input
     article = complete_preprocessing(article)
 
     #predicting article's emotionality
-    print(article[0])
-    print("b")
-    emotion_output = emo_model.predict(article[0])
-    print("a")
-    print(emotion_output)
+    emotion_output = (emo_model.predict([article]))[0]
     emo_dict = {
         "joy": f"{(round((emotion_output[0])*100))}%",
         "sadness": f"{(round((emotion_output[1])*100))}%",
@@ -63,8 +61,8 @@ def predict():
     article_credibility = max(credibility_dict, key=credibility_dict.get)
 
     #formatting data to be sent to html
-    emotion_result = f"The dominant emotion in the article is {dominant_emotion}. The probability distribution is {emo_dict}"
-    credibility_result = f"The article is likely to be {article_credibility}. The probability distribution is {credibility_dict}"
+    emotion_result = f"The dominant emotion is {dominant_emotion}. The probability distribution is {emo_dict}"
+    credibility_result = f"The article with its headline is likely to be {article_credibility}. The probability distribution is {credibility_dict}"
 
     print(f'Emotion output: {emotion_output}')
     print(f'Credibility output: {credibility_output}')
@@ -73,7 +71,7 @@ def predict():
     print(f'{headline_input} OR {content_input}')
     return render_template("index.html", emo_result=emotion_result, cred_result=credibility_result,
                            emo_array=emotion_output, cred_array=credibility_output)
-
+    
 
 if __name__ == "__main__":
-    flask_app.run(debug=True, port=3000)
+    flask_app.run(debug=True)

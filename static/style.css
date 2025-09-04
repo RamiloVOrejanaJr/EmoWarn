@@ -7,6 +7,10 @@
     font-family: "Poppins", sans-serif;
 }
 
+html { 
+    scroll-behavior: smooth;
+}
+
 body{
     min-height: 100vh;
     display: flex;
@@ -15,11 +19,10 @@ body{
     align-items: center;
     background-image: url("images/emowarn_bg2.png");
     background-size: contain;
-    padding-bottom: 50px;
 }   
 
 .welcomeMSG {
-    margin-top: 200px;
+    margin-top: 165px;
     font-family: "Poppins", sans-serif;
     text-align: center;
     max-width: 80%; /* Prevents the text from touching the sides */
@@ -105,6 +108,28 @@ button:hover{
     background: #F1E1C6;
 }
 
+.contact-dropdown {
+    display: none; /* Hidden by default */
+    position: fixed; /* Positioned near the button */
+    top: 113px; /* Adjust based on your nav bar height */
+    right: 100px; /* Adjust based on desired alignment */
+    background-color: rgba(200, 154, 106, 0.8);
+    color: beige;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 200px;
+    text-align: left;
+}
+.contact-dropdown p {
+    margin: 5px 0;
+}
+.contact-dropdown a:hover {
+    color: #F1E1C6; /* Text color on hover */
+    cursor: pointer; /* Changes cursor to pointer */
+}
+
 .container{
     position: relative;
     max-width: 700px;
@@ -113,7 +138,8 @@ button:hover{
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin-top: 100px;
+    margin-top: 65px;
+    flex: 1;
 }
 
 .container .form{
@@ -172,7 +198,7 @@ button:hover{
     background-color: #F1E1C6;
 }
 .form button:hover{
-    background: linear-gradient(to right, #7F5A3B, #F1E1C6);
+    background: linear-gradient(to left, #7F5A3B, #F1E1C6);
 }
 
 .formSectionContainer {
@@ -194,7 +220,7 @@ button:hover{
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: 600px; /* Increased height for each form */
+    height: 790px; /* Increased height for each form */
 }
 
 .formSection header {
@@ -227,39 +253,40 @@ button:hover{
 .resultLabelContainer {
     display: flex;            /* Align the labels horizontally */
     align-items: center;      /* Vertically center the labels */
-    gap: 5px;      
+    gap: 10px;      
     margin-bottom: 5px;           /* Add a small gap between the labels */
 }
 
 .dynamicLabel {
-    font-size: 1rem;
+    font-size: 0.5rem;
     font-weight: 400;
-    color: #555;
+    color: black;
+    margin-bottom: 20px;
+    height: 20px; /* Set a fixed height for dynamic labels */
+    display: flex;
 }
 
-.graphHeader {
+.graphHeader, .graphHeader2 {
     font-size: 1.3rem;
     font-weight: 500;
     color: #333;
     text-align: center;
-    margin-top: 20px; /* Add spacing above */
+    margin-top: 50px; /* Added spacing consistency */
 }
 
 .pieChartContainer {    
     width: 100%;
-    max-width: 250px;  /* Limit the width of the chart container */
+    max-width: 350px;  /* Limit the width of the chart container */
     margin-left: auto;
     margin-right: auto;
 }
 
 .emotionChartContainer {
-    text-align: center;  
-    margin-top: 20px;   /* Adjust this value to control space between charts */
-    padding: 15px;
     width: 100%;
-    max-width: 300px;    /* Limit the width of the chart container */
+    max-width: 350px;  /* Match the width of the fake news chart */
     margin-left: auto;
     margin-right: auto;
+    text-align: center;  
 }
 
 canvas {
@@ -323,5 +350,6 @@ canvas {
     font-size: 1rem;                   /* Adjust label font size */
     color: #333;                       /* Label color */
     font-weight: 500;                  /* Make the label bold */
-    transition: color 0.3s ease;       /* Smooth transition for color change */                    /* Optional: padding for better text interaction */
+    transition: color 0.3s ease;       /* Smooth transition for color change */               
+    margin-bottom: 200px;   
 }

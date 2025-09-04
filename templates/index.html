@@ -8,7 +8,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="static/style.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="static/footer.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <label class="welcomeMSG">
@@ -23,11 +26,17 @@
                 <nav>
                     <ul class="navLinks">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Guide</a></li>
+                        <li><a href="#footer">About</a></li>
+                        <li><a href="{{ url_for('instructions') }}">Guide</a></li>
                     </ul>
                 </nav>
-                <a class="cta" href="#"><button>Contact</button></a>
+                <a class="cta" href="javascript:void(0)" onclick="toggleContactDropdown()"><button>Contact</button></a>
         </header>
+        <div id="contactDropdown" class="contact-dropdown">
+            <a href="https://www.microsoft.com/en-us/microsoft-365/outlook/log-in">orv1728@dlsud.edu.ph</a>
+            <a href="https://www.microsoft.com/en-us/microsoft-365/outlook/log-in">grb1544@dlsud.edu.ph</a>
+            <a href="https://www.microsoft.com/en-us/microsoft-365/outlook/log-in">mat1726@dlsud.edu.ph</a>
+        </div>
         <div class="container">
             <section>
                 <form action="{{ url_for('predict')}}" class="form" method="post">
@@ -66,14 +75,15 @@
                         <label>Result:</label>
                         <label class="dynamicLabel">{{ emo_result }}</label>
                     </div>
-                    <header class="graphHeader">Graphical Results</header>
+                    <header class="graphHeader2">Graphical Results</header>
                     <div class="emotionChartContainer">
-                        <canvas id="emotionChart"></canvas> 
+                        <canvas id="emotionChart" width="400" height="400"></canvas>
                     </div>
                 </form>
             </section>
         </div>
-        <section class="recommendationSection">
+        <div class="recommendationSection">
+        <section>
             <h2>The Most Reliable Sources</h2>
             <ul class="recommendedLinks">
                 <li>
@@ -102,7 +112,61 @@
                 </li>
             </ul>
         </section>
+        </div>
+        <footer id="footer" class="footer-distributed">
+            <div class="footer-left">
+                <h3><img class="logo" src="static/images/rsz_emowarnlogo.png" alt="logo"></h3>
+
+                <p class="footer-company-name">Copyright © 2024 <strong>EmoWarn</strong> All rights reserved</p>
+            </div>
+            <div class="footer-center">
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>Philippines</span>Cavite</p>
+                </div>
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+639925522949</p>
+                </div>
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="#">emowarn@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <p class="footer-company-about">
+                    <span>About the website</span>
+                    <strong>EmoWarn</strong> aims to provide a quick, easy-to-use solution for 
+                    users to assess the authenticity of news articles and headlines in terms 
+                    of the emotional biases they may contain.
+                </p>
+                <div class="footer-icons">
+                    <a href="https://www.dlsud.edu.ph/"><img src="static/images/dlsud_logo.png"></a>
+                    <a href="https://flask.palletsprojects.com/en/stable/"><img src="static/images/flask.png"></a>
+                    <a href="https://www.python.org/"><img src="static/images/python.png"></a>
+                    <a href="https://www.pythonanywhere.com/"><img src="static/images/pyanywhere.png"></a>
+                </div>
+            </div>
+
+        </footer>
+
     </body>
+    <script>
+        //Contact Button
+        function toggleContactDropdown() {
+            const dropdown = document.getElementById('contactDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+    
+        // Optional: Close the dropdown when clicking outside of it
+        window.onclick = function(event) {
+            const dropdown = document.getElementById('contactDropdown');
+            if (!event.target.closest('.cta')) {
+                dropdown.style.display = 'none';
+            }
+        };
+    </script>
+
     <script>
         // Initialize the Pie Chart
         window.onload = function() {
@@ -128,22 +192,26 @@
                 }
             });
         };
-
-        // Emotion Classification Example (Second Chart)
         var ctx2 = document.getElementById('emotionChart').getContext('2d');
         var emotionChart = new Chart(ctx2, {
-            type: 'pie',  // You can change this to a different chart type as needed
+            type: 'pie',
             data: {
                 labels: ['Joy', 'Sadness', 'Anger', 'Fear', 'Surprise'],
                 datasets: [{
                     label: 'Emotion Probabilities',
-                    data: [3, 57, 3, 17, 21],
-                    borderColor: '#F1E1C6',
-                    backgroundColor: ['#FFC300', '#2310C5 ', '#C70039',  '#FF5800', 'FFDCF8'],  // Color for each segment
+                    data: [3, 2, 57, 17, 21],
+                    backgroundColor: ['#FFC300', '#2310C5', '#C70039', '#FF5800', '#FFDCF8'],
+                    borderColor: ['rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)'],
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                },
             }
         });
     </script>
