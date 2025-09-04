@@ -25,14 +25,14 @@ def complete_preprocessing(article):
 
 
 # get emotion clasification model
-emo_model = tf.keras.models.load_model('emo_model.keras')
-file = open('emo_tf_vectorizer.pkl', 'rb')
+emo_model = tf.keras.models.load_model('models/emo_model.keras')
+file = open('preprocessing/emo_tf_vectorizer.pkl', 'rb')
 emo_vectorizer = pkl.load(file)
 file.close()
 
 #get fake news classification model
-fake_news_model = tf.keras.models.load_model('fake_news_model.keras')
-file = open('auth_tf_vectorizer.pkl', 'rb')
+fake_news_model = tf.keras.models.load_model('models/fake_news_model.keras')
+file = open('preprocessing/auth_tf_vectorizer.pkl', 'rb')
 fake_news_vectorizer = pkl.load(file)
 file.close()
 
@@ -170,4 +170,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    flask_app.run(debug=False)
+    flask_app.run(debug=False, host = "127.0.0.128", port = 5000)
