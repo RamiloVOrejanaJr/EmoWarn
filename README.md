@@ -4,7 +4,8 @@ Step 1:
 Install necessary packages. If the latest version of each package does not work, 
 the corresponding version used in the original web application is shown below. 
 
-Use format "pip install package-name" (replace package-name with the actual package name, e.g.: 
+Use format "pip install package-name" (replace package-name with the actual package 
+name, e.g.: 
 pip install scipy
 
 
@@ -17,4 +18,9 @@ Necessary packages to install:
 
 
 Step 2: 
-Run app.py. 
+Run app.py, which is the web application using Flask as a wrapper API for the models. 
+This can be done both through command line or IDE.
+
+Usage manual for the web application:
+The web app has a built in user manual which can be accessed by clicking the "Guide" 
+button on the topbar of the web app.
