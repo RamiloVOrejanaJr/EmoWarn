@@ -1,19 +1,13 @@
+print("Importing dependencies...")
 from flask import Flask, request, render_template
 from nltk.corpus import stopwords
 import tensorflow as tf
 import pickle as pkl
-
-#import tf_keras
-
-import requests
 import re
-print("with checkpoints")
-
-print("finished importing")
+print("Finished importing dependencies")
 
 pattern = re.compile(r'\b(' + r'|'.join(stopwords.words('english')) + r')\b\s*')
 
-print("finished compiling re pattern")
 
 # define preprocessing method
 def complete_preprocessing(article):
@@ -24,7 +18,7 @@ def complete_preprocessing(article):
     return article
 
 
-# get emotion clasification model
+# get emotion classification model
 emo_model = tf.keras.models.load_model('models/emo_model.keras')
 file = open('preprocessing/emo_tf_vectorizer.pkl', 'rb')
 emo_vectorizer = pkl.load(file)
@@ -41,9 +35,7 @@ print("finished loading ai models")
 
 print()
 # Create flask app
-print("test")
 flask_app = Flask(__name__)
-print("test2")
 
 
 @flask_app.route("/")
@@ -57,22 +49,6 @@ def home():
             'fear': 1,
             'surprise': 1
             }
-
-    '''try:
-        # Replace <your_PC_IP> with your actual PC's IP address and port
-        pc_server_url = "http://emowarn.ddns.net:5000/data"
-        response = requests.get(pc_server_url)
-        print("Response type: ", type(response))
-        print("Response: ", response)
-
-        # Process the response from the PC server
-        if response.status_code == 200:
-            data = response.json()
-            #return jsonify({"message": "Successfully fetched data", "data": data})
-        #else:
-            #return jsonify({"error": "Failed to connect to PC server"}), 500
-    except Exception as e:
-        print(jsonify({"error": str(e)}), 500)'''
 
     headline_placeholder = "Enter news headline..."
     article_placeholder = "Enter news article..."
@@ -92,23 +68,23 @@ def predict():
     headline_input = request.form.get('headline')
     content_input = request.form.get('article')
 
+    if headline_input == "":
+        headline_input = "No headline inputted! Please input a headline to get a proper result."
+    if content_input == "":
+        content_input = "No article inputted! Please input an article to get a proper result."
+
     print("finished grabbing user input")
 
     # getting and preprocessing user inputted article
     article = headline_input + content_input
-    #print(type(article))
     article = [complete_preprocessing(article)]
-    #print(type(article))
     emo_vector = emo_vectorizer.transform(article)
-    #print("emo vector: ", emo_vector)
     fake_news_vector = fake_news_vectorizer.transform(article)
-    #print("fake news vector: ", fake_news_vector)
 
     print("finished preprocessing user input")
 
     # predicting article's emotionality
     emotion_output = (emo_model.predict([emo_vector]))[0]
-    #del emo_vector
 
     print("finished predicting emotionality")
 
@@ -129,21 +105,20 @@ def predict():
     }
 
     dominant_emotion = max(num_emo_dict, key=num_emo_dict.get)
-    #del num_emo_dict
 
     # predicting article's credibility
     credibility_output = (fake_news_model.predict([fake_news_vector]))[0]
-
-    print("finished predicting credibility")
 
     num_credibility_dict = {
         "fake news": (round((credibility_output[1]) * 100)),
         "real news": (round((credibility_output[0]) * 100))
     }
+
     credibility_dict = {
         "fake news": f"{(num_credibility_dict['fake news'])}%",
         "real news": f"{(num_credibility_dict['real news'])}%"
     }
+
     article_credibility = max(num_credibility_dict, key=num_credibility_dict.get)
 
     # formatting data to be sent to html
