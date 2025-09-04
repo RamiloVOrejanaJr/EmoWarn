@@ -42,11 +42,11 @@
                 <form action="{{ url_for('predict')}}" class="form" method="post">
                     <div class="input-box">
                         <label>News Headline</label>
-                        <input type="text" name = "headline" placeholder="Enter news headline...">
+                        <input type="text" name = "headline" placeholder="{{ headline_placeholder }}">
                     </div>
                     <div class="input-box">
                         <label>News Article</label>
-                        <textarea class="textarea" name = "article" placeholder="Enter news article..." rows="8"></textarea>
+                        <textarea class="textarea" name = "article" placeholder="{{ article_placeholder }}" rows="8"></textarea>
                     </div>
                     <button type="submit">Submit</button>
                 </form>
@@ -77,7 +77,7 @@
                     </div>
                     <header class="graphHeader2">Graphical Results</header>
                     <div class="emotionChartContainer">
-                        <canvas id="emotionChart" width="400" height="400"></canvas>
+                        <canvas id="emotionChart" width="400" height="400"></canvas> 
                     </div>
                 </form>
             </section>
@@ -112,43 +112,43 @@
                 </li>
             </ul>
         </section>
+    </div>
+    <footer id="footer" class="footer-distributed">
+        <div class="footer-left">
+            <h3><img class="logo" src="static/images/rsz_emowarnlogo.png" alt="logo"></h3>
+
+            <p class="footer-company-name">Copyright © 2024 <strong>EmoWarn</strong> All rights reserved</p>
         </div>
-        <footer id="footer" class="footer-distributed">
-            <div class="footer-left">
-                <h3><img class="logo" src="static/images/rsz_emowarnlogo.png" alt="logo"></h3>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Philippines</span>Cavite</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+639925522949</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="#">emowarn@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the website</span>
+                <strong>EmoWarn</strong> aims to provide a quick, easy-to-use solution for 
+                users to assess the authenticity of news articles and headlines in terms 
+                of the emotional biases they may contain.
+            </p>
+            <div class="footer-icons">
+                <a href="https://www.dlsud.edu.ph/"><img src="static/images/dlsud_logo.png"></a>
+                <a href="https://flask.palletsprojects.com/en/stable/"><img src="static/images/flask.png"></a>
+                <a href="https://www.python.org/"><img src="static/images/python.png"></a>
+                <a href="https://www.pythonanywhere.com/"><img src="static/images/pyanywhere.png"></a>
+            </div>
+        </div>
 
-                <p class="footer-company-name">Copyright © 2024 <strong>EmoWarn</strong> All rights reserved</p>
-            </div>
-            <div class="footer-center">
-                <div>
-                    <i class="fa fa-map-marker"></i>
-                    <p><span>Philippines</span>Cavite</p>
-                </div>
-                <div>
-                    <i class="fa fa-phone"></i>
-                    <p>+639925522949</p>
-                </div>
-                <div>
-                    <i class="fa fa-envelope"></i>
-                    <p><a href="#">emowarn@gmail.com</a></p>
-                </div>
-            </div>
-            <div class="footer-right">
-                <p class="footer-company-about">
-                    <span>About the website</span>
-                    <strong>EmoWarn</strong> aims to provide a quick, easy-to-use solution for 
-                    users to assess the authenticity of news articles and headlines in terms 
-                    of the emotional biases they may contain.
-                </p>
-                <div class="footer-icons">
-                    <a href="https://www.dlsud.edu.ph/"><img src="static/images/dlsud_logo.png"></a>
-                    <a href="https://flask.palletsprojects.com/en/stable/"><img src="static/images/flask.png"></a>
-                    <a href="https://www.python.org/"><img src="static/images/python.png"></a>
-                    <a href="https://www.pythonanywhere.com/"><img src="static/images/pyanywhere.png"></a>
-                </div>
-            </div>
-
-        </footer>
+    </footer>
 
     </body>
     <script>
@@ -169,14 +169,16 @@
 
     <script>
         // Initialize the Pie Chart
-        window.onload = function() {
+
+        let result = JSON.parse('{{ chart_data | tojson }}');
+        window.onload = function() {            
             const ctx = document.getElementById('pieChart').getContext('2d');
             const pieChart = new Chart(ctx, {
                 type: 'pie',  // Pie chart type
                 data: {
                     labels: ['Fake', 'Real'],  // Labels for segments
                     datasets: [{
-                        data: [1, 99],  // Data values (e.g., 70% Real, 30% Fake)
+                        data: [result.fake, result.real],  // Data values (e.g., 70% Real, 30% Fake)
                         backgroundColor: ['#F44336', '#4CAF50'],  // Color for each segment
                         borderColor: ['rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)'],  // Border color for each segment
                         borderWidth: 1
@@ -192,14 +194,15 @@
                 }
             });
         };
+
+        // Emotion Classification Example (Second Chart)
         var ctx2 = document.getElementById('emotionChart').getContext('2d');
         var emotionChart = new Chart(ctx2, {
-            type: 'pie',
+            type: 'pie',  
             data: {
                 labels: ['Joy', 'Sadness', 'Anger', 'Fear', 'Surprise'],
                 datasets: [{
-                    label: 'Emotion Probabilities',
-                    data: [3, 2, 57, 17, 21],
+                    data: [result.joy, result.sadness, result.anger, result.fear, result.surprise],                    
                     backgroundColor: ['#FFC300', '#2310C5', '#C70039', '#FF5800', '#FFDCF8'],
                     borderColor: ['rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)', 'rgba(200, 154, 106, 0.8)'],
                     borderWidth: 1
