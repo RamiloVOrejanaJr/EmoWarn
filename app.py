@@ -1,33 +1,32 @@
 print("Importing dependencies...")
 from flask import Flask, request, render_template
 from nltk.corpus import stopwords
-import tensorflow as tf
-import pickle as pkl
-import re
+from tensorflow.keras.models import load_model
+from pickle import load
+from re import sub, compile
 print("Finished importing dependencies")
 
-pattern = re.compile(r'\b(' + r'|'.join(stopwords.words('english')) + r')\b\s*')
-
+pattern = compile(r'\b(' + r'|'.join(stopwords.words('english')) + r')\b\s*')
 
 # define preprocessing method
 def complete_preprocessing(article):
     article = str(article).lower()
-    article = re.sub('[^a-zA-Z]', ' ', article)
-    article = re.sub('\s+[^a-zA-Z]\s+', ' ', article)
+    article = sub('[^a-zA-Z]', ' ', article)
+    article = sub('\s+[^a-zA-Z]\s+', ' ', article)
     article = pattern.sub('', article)
     return article
 
 
 # get emotion classification model
-emo_model = tf.keras.models.load_model('models/emotion_model.keras')
+emo_model = load_model('models/emotion_model.keras')
 file = open('preprocessing/emo_tf_vectorizer.pkl', 'rb')
-emo_vectorizer = pkl.load(file)
+emo_vectorizer = load(file)
 file.close()
 
 #get fake news classification model
-fake_news_model = tf.keras.models.load_model('models/fake_news_model.keras')
+fake_news_model = load_model('models/fake_news_model.keras')
 file = open('preprocessing/auth_tf_vectorizer.pkl', 'rb')
-fake_news_vectorizer = pkl.load(file)
+fake_news_vectorizer = load(file)
 file.close()
 
 
@@ -41,13 +40,13 @@ flask_app = Flask(__name__)
 @flask_app.route("/")
 def home():
 
-    data = {'fake': 99,
-            'real': 1,
-            'joy': 96,
-            'sadness': 1,
-            'anger': 1,
-            'fear': 1,
-            'surprise': 1
+    data = {'fake': 50,
+            'real': 50,
+            'joy': 20,
+            'sadness': 20,
+            'anger': 20,
+            'fear': 20,
+            'surprise': 20
             }
 
     headline_placeholder = "Enter news headline..."
