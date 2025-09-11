@@ -19,7 +19,7 @@ def complete_preprocessing(article):
 
 
 # get emotion classification model
-emo_model = tf.keras.models.load_model('models/emo_model.keras')
+emo_model = tf.keras.models.load_model('models/emotion_model.keras')
 file = open('preprocessing/emo_tf_vectorizer.pkl', 'rb')
 emo_vectorizer = pkl.load(file)
 file.close()
@@ -76,7 +76,7 @@ def predict():
     print("finished grabbing user input")
 
     # getting and preprocessing user inputted article
-    article = headline_input + content_input
+    article = headline_input + " " + content_input
     article = [complete_preprocessing(article)]
     emo_vector = emo_vectorizer.transform(article)
     fake_news_vector = fake_news_vectorizer.transform(article)
@@ -107,7 +107,10 @@ def predict():
     dominant_emotion = max(num_emo_dict, key=num_emo_dict.get)
 
     # predicting article's credibility
+    to_predict = (fake_news_model.predict([fake_news_vector]))[0]
+    print(to_predict)
     credibility_output = (fake_news_model.predict([fake_news_vector]))[0]
+    print(type(credibility_output))
 
     num_credibility_dict = {
         "fake news": (round((credibility_output[1]) * 100)),
