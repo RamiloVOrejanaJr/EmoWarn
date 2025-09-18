@@ -1,10 +1,10 @@
-print("Importing dependencies...")
+#print("Importing dependencies...")
 from flask import Flask, request, render_template
 from nltk.corpus import stopwords
 from tensorflow.keras.models import load_model
 from pickle import load
 from re import sub, compile
-print("Finished importing dependencies")
+#print("Finished importing dependencies")
 
 pattern = compile(r'\b(' + r'|'.join(stopwords.words('english')) + r')\b\s*')
 
@@ -32,9 +32,9 @@ fake_news_vectorizer = load(file)
 file.close()
 
 
-print("finished loading ai models")
+#print("finished loading ai models")
 
-print()
+#print()
 # Create flask app
 flask_app = Flask(__name__)
 
@@ -74,7 +74,7 @@ def predict():
     if content_input == "":
         content_input = "No article inputted! Please input an article to get a proper result."
 
-    print("finished grabbing user input")
+    #print("finished grabbing user input")
 
     # getting and preprocessing user inputted article
     article = headline_input + " " + content_input
@@ -82,12 +82,12 @@ def predict():
     emo_vector = emo_vectorizer.transform(article)
     fake_news_vector = fake_news_vectorizer.transform(article)
 
-    print("finished preprocessing user input")
+    #print("finished preprocessing user input")
 
     # predicting article's emotionality
     emotion_output = (emo_model.predict([emo_vector]))[0]
 
-    print("finished predicting emotionality")
+    #print("finished predicting emotionality")
 
     num_emo_dict = {
         "joy": (round((emotion_output[0]) * 100)),
@@ -109,9 +109,9 @@ def predict():
 
     # predicting article's credibility
     to_predict = (fake_news_model.predict([fake_news_vector]))[0]
-    print(to_predict)
+    #print(to_predict)
     credibility_output = (fake_news_model.predict([fake_news_vector]))[0]
-    print(type(credibility_output))
+    #print(type(credibility_output))
 
     num_credibility_dict = {
         "fake news": (round((credibility_output[1]) * 100)),
@@ -141,7 +141,7 @@ def predict():
             'surprise': int(num_emo_dict['surprise'])
             }
 
-    print("finished formatting output data")
+    #print("finished formatting output data")
 
     return render_template("index.html", emo_result=emotion_result, cred_result=credibility_result, chart_data=data,
                            headline_placeholder=headline_placeholder, article_placeholder=article_placeholder
