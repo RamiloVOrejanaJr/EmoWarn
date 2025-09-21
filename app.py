@@ -1,5 +1,5 @@
 print("Importing dependencies...")
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, flash, redirect, url_for, get_flashed_messages #abort, jsonify, get_flashed_messages
 from pickle import load
 #from nltk.corpus import stopwords
 #from re import sub, compile
@@ -36,10 +36,11 @@ file.close()
 print("finished loading ai models")
 # Create flask app
 flask_app = Flask(__name__)
+flask_app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @flask_app.route("/")
-def home():
-
+def home(): #headline_placeholder = "Enter news headline...", article_placeholder = "Enter news article..."):
+    #flash("Welcome to Emo Warn!", "info")
     data = {'fake': 50,
             'real': 50,
             'joy': 20,
@@ -75,10 +76,13 @@ def predict():
     #grab user input from form
     headline_input = request.form.get('headline')
     content_input = request.form.get('article')
-    if headline_input == "":
-        headline_input = "No headline inputted! Please input a headline to get a proper result."
-    if content_input == "":
-        content_input = "No article inputted! Please input an article to get a proper result."
+
+    if headline_input == "" or content_input == "":
+        flash("Invalid input! Please properly enter the following: ", "error")
+        if headline_input == "": flash("Article headline")
+        if content_input == "": flash("Article main body")
+        return redirect(url_for('home'))
+
     article = headline_input + " " + content_input
     print("finished grabbing user input")
 
