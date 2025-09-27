@@ -40,7 +40,6 @@ flask_app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @flask_app.route("/")
 def home(): #headline_placeholder = "Enter news headline...", article_placeholder = "Enter news article..."):
-    #flash("Welcome to Emo Warn!", "info")
     data = {'fake': 50,
             'real': 50,
             'joy': 20,
@@ -78,9 +77,9 @@ def predict():
     content_input = request.form.get('article')
 
     if headline_input == "" or content_input == "":
-        flash("Invalid input! Please properly enter the following: ", "error")
-        if headline_input == "": flash("Article headline")
-        if content_input == "": flash("Article main body")
+        flash("Incomplete input! Please enter the complete article and its headline.", "error")
+        #if headline_input == "": flash("Article headline")
+        #if content_input == "": flash("Article main body")
         return redirect(url_for('home'))
 
     article = headline_input + " " + content_input

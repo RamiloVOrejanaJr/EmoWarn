@@ -29,6 +29,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     line-height: 1.6;
+    margin-bottom: 65px;;
 }
 
 .welcomeTitle {
@@ -138,7 +139,6 @@ button:hover{
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin-top: 65px;
     flex: 1;
 }
 
@@ -372,7 +372,7 @@ canvas {
     color: #333;                       /* Label color */
     font-weight: 500;                  /* Make the label bold */
     transition: color 0.3s ease;       /* Smooth transition for color change */               
-    margin-bottom: 200px;   
+    margin-bottom: 80px;
 }
 
 @media (max-width: 932px) {
@@ -389,4 +389,44 @@ canvas {
         margin: 0 auto;        /* Center containers horizontally */
         text-align: center;    /* Center-align text content */
     }
+}
+
+ /* Two column layout for charts */
+.warningBox {
+    display: flex;
+    /* width: fit-content; Element will be 90% of its parent's width */
+    margin: auto;  /*Center the box */
+    background-color:  rgba(175, 134, 91, 0.9);
+    border-radius: 8px;
+    margin-bottom: 25px;;
+}
+
+.warningIcon-column {
+    flex-grow: 15;
+    display: flex;
+    padding: 8px 16px;
+    width: fit-content;
+}
+
+.warningIcon{
+    width: 32px;
+    height: 32px;  
+    margin: auto;
+    fill: #F1E1C6;
+}
+
+.warningText-column {
+    flex-grow: 85;
+    width: fit-content;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 8px 16px;
+    background-color:#F1E1C6;
+    border-radius: 8px;
+}
+
+.warningText{
+    font-family: "Poppins", sans-serif;
 }
