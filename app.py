@@ -1,18 +1,8 @@
 print("Importing dependencies...")
-from flask import Flask, request, render_template, flash, redirect, url_for, get_flashed_messages #abort, jsonify, get_flashed_messages
+from flask import Flask, request, render_template, flash, redirect, url_for
+from emowarn_utils import *
 from pickle import load
-#from nltk.corpus import stopwords
-#from re import sub, compile
 print("Finished importing dependencies")
-
-'''pattern = compile(r'\b(' + r'|'.join(stopwords.words('english')) + r')\b\s*')
-def complete_preprocessing(article):
-    article = str(article).lower()
-    article = sub('[^a-zA-Z]', ' ', article)
-    article = sub('\s+[^a-zA-Z]\s+', ' ', article)
-    article = pattern.sub('', article)
-    return article'''
-
 
 #get emotion classification model
 file = open('models/emo_svc.pkl', 'rb')
@@ -38,7 +28,7 @@ print("finished loading ai models")
 flask_app = Flask(__name__)
 flask_app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-@flask_app.route("/")
+@flask_app.route("/", methods=['GET'])
 def home(): #headline_placeholder = "Enter news headline...", article_placeholder = "Enter news article..."):
     data = {'fake': 50,
             'real': 50,
@@ -56,18 +46,9 @@ def home(): #headline_placeholder = "Enter news headline...", article_placeholde
                            article_placeholder=article_placeholder)
 
 
-@flask_app.route('/instructions')
+@flask_app.route('/instructions', methods=['GET'])
 def instructions():
     return render_template('instructions.html')
-
-
-def normalize_to_int(probability_distribution):
-    probability_distribution = [round(probability * 100) for probability in probability_distribution[0]]
-    least_value = probability_distribution.index(min(probability_distribution))
-    rem = 100 - sum(probability_distribution)
-    probability_distribution[least_value] += rem
-
-    return probability_distribution
 
 
 @flask_app.route("/predict", methods=["POST", "GET"])
