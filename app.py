@@ -1,28 +1,10 @@
 print("Importing dependencies...")
 from flask import Flask, request, render_template, flash, redirect, url_for
 from emowarn_utils import *
-from pickle import load
 print("Finished importing dependencies")
 
-#get emotion classification model
-file = open('models/emo_svc.pkl', 'rb')
-emo_model = load(file)
-file.close()
-
-file = open('preprocessing/emo_svc_vectorizer.pkl', 'rb')
-emo_vectorizer = load(file)
-file.close()
-
-#get fake news classification model
-file = open('models/auth_svc.pkl', 'rb')
-fake_news_model = load(file)
-file.close()
-
-file = open('preprocessing/auth_svc_vectorizer.pkl', 'rb')
-fake_news_vectorizer = load(file)
-file.close()
-
-
+print("Importing models...")
+emo_model, emo_vectorizer, fake_news_model, fake_news_vectorizer = load_models_and_vectorizers()
 print("finished loading ai models")
 # Create flask app
 flask_app = Flask(__name__)

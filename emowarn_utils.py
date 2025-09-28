@@ -1,3 +1,4 @@
+from pickle import load
 from re import sub#, compile
 #from nltk.corpus import stopwords
 
@@ -23,3 +24,20 @@ def complete_preprocessing(article):
     #article = pattern.sub('', article)
 
     return article
+
+
+def load_models_and_vectorizers():
+
+    with open("models/emo_svc.pkl", "rb") as file:
+        emo_model = load(file)
+
+    with open("preprocessing/emo_svc_vectorizer.pkl", "rb") as file:
+        emo_vectorizer = load(file)
+
+    with open("models/auth_svc.pkl", "rb") as file:
+        auth_model = load(file)
+
+    with open("preprocessing/auth_svc_vectorizer.pkl", "rb") as file:
+        auth_vectorizer = load(file)
+
+    return emo_model, emo_vectorizer, auth_model, auth_vectorizer
