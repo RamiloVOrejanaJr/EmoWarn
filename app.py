@@ -6,6 +6,7 @@ print("Finished importing dependencies")
 print("Importing models...")
 emo_model, emo_vectorizer, fake_news_model, fake_news_vectorizer = load_models_and_vectorizers()
 print("finished loading ai models")
+
 # Create flask app
 flask_app = Flask(__name__)
 flask_app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'

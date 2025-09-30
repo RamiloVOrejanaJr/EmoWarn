@@ -57,16 +57,11 @@
                             </div>
                         </div>
                             
-                            <!-- <div class="flash-messages">
-                                
-                            </div>   -->
                         {% endif %}
                     {% endwith %}                
                 {% endblock %}
 
         <div class="container">
-            
-
             <section>                
                 <form action="{{ url_for('predict')}}" class="form" method="post">
                     <div class="input-box">
@@ -81,6 +76,8 @@
                 </form>
             </section>
         </div>  
+
+        
         <div class="formSectionContainer">
             <section class="formSection">
                 <header>Fake News Detection</header>
