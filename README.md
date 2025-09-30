@@ -1,26 +1,14 @@
-This serves as the manual to run the EmoWarn web application locally.
+EmoWarn is a light web application that uses a news article's headline and main content to analyze the 
+probability of it being an article composed for the purpose of spreading misinformation, colloquially known
+as fake news. It also analyzes the probability of which emotion the reader is likely to feel after reading
+the article to attempt to warn the user about any emotional biases in the article. The emotions are based on 
+Paul Ekman's basic emotions of Joy, Anger, Fear, Sadness, and Surprise. 
 
-Step 1:
-Install necessary packages. If the latest version of each package does not work, 
-the corresponding version used in the original web application is shown below. 
+The app uses Python 3.10. As the web application has been built to be deployed on the free model of the 
+pythonanywhere deployment service, the external package versions used are those used by default in 
+pythonanywhere. More detailes can be found in their "Batteries Included" page.
 
-Use format "pip install package-name" (replace package-name with the actual package 
-name, e.g.: 
-pip install scipy
-
-
-Necessary packages to install:
-1. scipy (version used: 1.15.3)
-2. flask (version used: 3.0.3)
-3. pickle (version used: 4.0)
-4. tensorflow (version used: 2.18.1)
-5. nltk (version used: 3.9.1)
-
-
-Step 2: 
-Run app.py, which is the web application using Flask as a wrapper API for the models. 
-This can be done both through command line or IDE.
-
-Usage manual for the web application:
-The web app has a built in user manual which can be accessed by clicking the "Guide" 
-button on the topbar of the web app.
+The relevant external packages necessary to run the app:
+1. numpy v1.21.6
+2. flask v3.0.3
+3. scikit-learn v1.0.2
